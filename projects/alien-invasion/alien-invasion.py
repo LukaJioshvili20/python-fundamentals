@@ -3,15 +3,22 @@ import sys
 # Game functionality
 import pygame
 
+# Import settings
+from settings import settings_module
+
 
 class AlienInvasion:
     # Game assets and behavior
     def __init__(self):
         # Init game and create resources
-        self.screen = pygame.display.set_mode((1200, 800))
+        pygame.init()
+        self.settings = settings_module.Settings()
+
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Alien Invasion")
 
-        self.background_color = (230, 230, 230)
     def run_game(self):
         # Main Loop/started
         while True:
@@ -20,7 +27,7 @@ class AlienInvasion:
                 if event.type == pygame.QUIT:
                     sys.exit()
             # update screen background
-            self.screen.fill(self.background_color)
+            self.screen.fill(self.settings.background_color)
             # update screen
             pygame.display.flip()
 
