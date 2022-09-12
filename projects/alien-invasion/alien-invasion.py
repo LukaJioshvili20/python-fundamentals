@@ -3,9 +3,9 @@ import sys
 # Game functionality
 import pygame
 
-# Import settings
+# Import modules
 from settings import settings_module
-
+from ship import Ship
 
 class AlienInvasion:
     # Game assets and behavior
@@ -19,6 +19,8 @@ class AlienInvasion:
         )
         pygame.display.set_caption("Alien Invasion")
 
+        self.ship = Ship(self)
+
     def run_game(self):
         # Main Loop/started
         while True:
@@ -28,6 +30,8 @@ class AlienInvasion:
                     sys.exit()
             # update screen background
             self.screen.fill(self.settings.background_color)
+            self.ship.blitme()
+
             # update screen
             pygame.display.flip()
 
