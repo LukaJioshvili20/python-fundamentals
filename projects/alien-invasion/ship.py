@@ -1,0 +1,18 @@
+import pygame
+
+
+class Ship:
+    def __init__(self, ai_game):
+        # Init Starting position of the ship
+        self.screen = ai_game.screen
+        self.screen_rect = ai_game.screen.get_react()
+
+        # Loading Ship Image
+        self.image = pygame.image.load('settings/images/ship.bmp')
+        self.rect = self.image.get_rect()
+        # Ship location
+        self.rect.midbottom = self.screen_rect.midbottom
+
+    def blitme(self):
+        # Draw ship to current location
+        self.screen.blit(self.image, self.rect)
