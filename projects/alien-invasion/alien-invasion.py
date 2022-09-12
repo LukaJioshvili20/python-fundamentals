@@ -7,6 +7,7 @@ import pygame
 from settings import settings_module
 from ship import Ship
 
+
 class AlienInvasion:
     # Game assets and behavior
     def __init__(self):
@@ -24,16 +25,22 @@ class AlienInvasion:
     def run_game(self):
         # Main Loop/started
         while True:
-            # keyboard and mouse events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            # update screen background
-            self.screen.fill(self.settings.background_color)
-            self.ship.blitme()
+            self._check_events()
+            self._update_screen()
 
-            # update screen
-            pygame.display.flip()
+    def _check_events(self):
+        # keyboard and mouse events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+    def _update_screen(self):
+        # update screen background
+        self.screen.fill(self.settings.background_color)
+        self.ship.blitme()
+
+        # update screen
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
