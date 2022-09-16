@@ -69,6 +69,16 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self):
+        # Check for bullet collisions on aliens
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+        if not self.aliens:
+            self.bullets.empty()
+            self._create_alien_fleet()
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
