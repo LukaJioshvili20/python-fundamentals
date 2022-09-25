@@ -11,7 +11,7 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
 
         # Loading Ship Image
-        self.image = pygame.image.load('settings/images/ship.bmp')
+        self.image = pygame.image.load('settings/images/DurrrSpaceShip_2.bmp')
         self.rect = self.image.get_rect()
         # Ship location
         self.rect.midbottom = self.screen_rect.midbottom
