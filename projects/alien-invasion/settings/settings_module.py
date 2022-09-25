@@ -1,25 +1,28 @@
+import pygame.image
+
+
 class Settings:
     # Settings store for game
     def __init__(self):
         # Screen settings
         self.screen_width = 1200
         self.screen_height = 800
-        self.background_color = (230, 230, 230)
-
+        self.background_color = (1, 11, 25)
+        self.background_image = pygame.image.load('settings/images/space.bmp')
         # Ship settings
         self.ship_limit = 3
 
         # Bullet settings
         self.bullet_width = 3
         self.bullet_height = 15
-        self.bullet_color = (60, 60, 60)
-        self.bullets_allowed = 10
+        self.bullet_color = (156, 12, 4)
+        self.bullets_allowed = 5
 
         # Alien Settings
         self.fleet_drop_speed = 10
 
         # Game speed
-        self.speedup_scale = 1.1
+        self.speedup_scale = 1.25
         # Alien Point increase
         self.score_scale = 1.5
         self.init_dynamic_settings()
