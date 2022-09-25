@@ -34,7 +34,8 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_alien_fleet()
-
+        self.space_background = pygame.transform.scale(self.settings.background_image,
+                            self.screen.get_size())
         # Button to start
         self.play_button = Button(self, "Play")
 
@@ -137,7 +138,7 @@ class AlienInvasion:
 
     def _update_screen(self):
         # update screen background
-        self.screen.fill(self.settings.background_color)
+        self.screen.blit(self.space_background, (0, 0))
         self.ship.blitme()
 
         if not self.stats.game_active:
@@ -152,27 +153,29 @@ class AlienInvasion:
         pygame.display.flip()
 
     def _create_alien_fleet(self):
-        alien = Alien(self)
-        alien_width, alien_height = alien.rect.size
-        avaliable_space_x = self.settings.screen_width - (2 * alien_width)
-        total_aliens_x = avaliable_space_x // (2 * alien_width)
+        if self.stats.game_active:
+            alien = Alien(self)
+            alien_width, alien_height = alien.rect.size
+            avaliable_space_x = self.settings.screen_width - (2 * alien_width)
+            total_aliens_x = avaliable_space_x // (2 * alien_width)
 
-        # Number of rows of fleet to fit on the screen
-        ship_height = self.ship.rect.height
-        avaliable_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
-        total_rows = avaliable_space_y // (2 * alien_height)
+            # Number of rows of fleet to fit on the screen
+            ship_height = self.ship.rect.height
+            avaliable_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+            total_rows = avaliable_space_y // (2 * alien_height)
 
-        for row_number in range(total_rows):
-            for number_alien in range(total_aliens_x):
-                self._create_alien(number_alien, row_number)
+            for row_number in range(total_rows):
+                for number_alien in range(total_aliens_x):
+                    self._create_alien(number_alien, row_number)
 
     def _create_alien(self, number_alien, row_number):
-        alien = Alien(self)
-        alien_width, alien_height = alien.rect.size
-        alien.x = alien_width + 2 * alien_width * number_alien
-        alien.rect.x = alien.x
-        alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
-        self.aliens.add(alien)
+        if self.stats.game_active:
+            alien = Alien(self)
+            alien_width, alien_height = alien.rect.size
+            alien.x = alien_width + 2 * alien_width * number_alien
+            alien.rect.x = alien.x
+            alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+            self.aliens.add(alien)
 
     def _update_aliens(self):
         # Update alien position when it touches the edge of the screen

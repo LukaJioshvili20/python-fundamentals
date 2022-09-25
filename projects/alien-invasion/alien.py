@@ -9,7 +9,7 @@ class Alien(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         # Load Alien image and set its rect attribute
-        self.image = pygame.image.load('settings/images/alien.bmp')
+        self.image = pygame.image.load('settings/images/xenis-orange-c-1.bmp')
         self.rect = self.image.get_rect()
 
         # Alien default position
