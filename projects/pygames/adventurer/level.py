@@ -53,8 +53,18 @@ class Level:
             if sprite.rect.colliderect(player.rect):
                 if player.direction.x < 0:
                     player.rect.left = sprite.rect.right
+                    player.collide_on_left = True
+                    self.current_x = player.rect.left
                 elif player.direction.x > 0:
                     player.rect.right = sprite.rect.left
+                    player.collide_on_left = True
+                    self.current_x = player.rect.right
+
+        if player.collide_on_left and (player.rect.left < self.current_x or player.direction.x >= 0):
+            player.collide_on_left = False
+
+        if player.collide_on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
+            player.collide_on_right = False
 
     def vertical_movement_collisions(self):
         player = self.player.sprite
