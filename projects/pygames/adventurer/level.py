@@ -1,6 +1,7 @@
 import pygame
 from tiles import Tile
 from player import Player
+from particles import ParticleEffect
 
 from settings import tile_size, screen_width
 
@@ -11,8 +12,20 @@ class Level:
         # Level Setup
         self.display_surface = surface
         self.setup_level(level_data)
-
         self.world_shift = 0
+        self.current_x = 0
+
+        # Dust settings
+        self.dust_sprite = pygame.sprite.GroupSingle()
+
+    def create_jump_particles(self, pos):
+        if self.player.sprite.facing_right:
+            pos -= pygame.math.Vector2(10, 5)
+        else:
+            pos += pygame.math.Vector2(10, -5)
+
+        jump_particle_sprite = ParticleEffect(pos, 'jump')
+        self.dust_sprite.add(jump_particle_sprite)
 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
@@ -27,7 +40,7 @@ class Level:
                     tile = Tile((x, y), tile_size)
                     self.tiles.add(tile)
                 if cell == "P":
-                    player_sprite = Player((x, y))
+                    player_sprite = Player((x, y), self.display_surface, self.create_jump_particles)
                     self.player.add(player_sprite)
 
     def scroll_x(self):
@@ -88,6 +101,10 @@ class Level:
             player.collide_on_ceiling = False
 
     def run(self):
+        # Dust Particles
+        self.dust_sprite.update(self.world_shift)
+        self.dust_sprite.draw(self.display_surface)
+
         # Level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
