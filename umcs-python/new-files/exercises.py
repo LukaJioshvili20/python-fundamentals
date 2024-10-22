@@ -248,12 +248,59 @@ class Exercise4:
             print("The equation has no real roots.")
 
 
+class Exercise5:
+    """
+    A class that asks the user to input 5 numbers and finds the largest number using a for loop.
+
+    Attributes:
+        numbers (list of float): A list of 5 user-provided numbers.
+        largest_number (float): The largest number from the input list.
+    """
+
+    def __init__(self):
+        """
+        Initializes the class, asks for user input, and finds the largest number.
+        """
+        self.numbers = []
+        self.largest_number = None
+        self._get_numbers_from_user()
+        self._find_largest_number()
+
+    def _get_numbers_from_user(self) -> None:
+        """
+        Prompts the user to input 5 numbers and stores them in the `numbers` list.
+        """
+        for i in range(5):
+            while True:
+                try:
+                    number = float(input(f"Enter number {i + 1}: "))
+                    self.numbers.append(number)
+                    break  # Exit the loop if the input is valid
+                except ValueError:
+                    print("Invalid input! Please enter a valid number.")
+
+    def _find_largest_number(self) -> None:
+        """
+        Finds the largest number from the list of numbers entered by the user.
+        """
+        for number in self.numbers:
+            if self.largest_number is None or number > self.largest_number:
+                self.largest_number = number
+
+        print(f"The largest number is: {self.largest_number}")
+
+
 if __name__ == "__main__":
     try:
-        # Exercise1()
-        # Exercise2()
-        # Exercise3()
+        print("Welcome to Exercise1!")
+        Exercise1()
+        print("Welcome to Exercise2!")
+        Exercise2()
+        print("Welcome to Exercise3!")
+        Exercise3()
+        print("Welcome to Exercise4!")
         Exercise4()
-
+        print("Welcome to Exercise5!")
+        Exercise5()
     except ValueError as e:
         print(f"Error: {e}")
