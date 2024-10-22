@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -174,7 +175,7 @@ class Exercise3:
         self.target_string = input("Enter word: ")
 
     def __find_char_in_string(
-        self,
+            self,
     ) -> None:
         for i in range(len(self.target_string)):
             if self.target_string[i] == self.target_char:
@@ -185,11 +186,74 @@ class Exercise3:
         )
 
 
+class Exercise4:
+    """
+    A class to calculate the roots of a quadratic equation in the form ax^2 + bx + c = 0.
+
+    Attributes:
+        a (float): The coefficient of x^2.
+        b (float): The coefficient of x.
+        c (float): The constant term.
+    """
+
+    def __init__(self):
+        """
+        Initializes the class by asking the user for coefficients a, b, and c,
+        and then calculates the roots of the quadratic equation.
+        """
+        self.a = self._get_coefficient("a")
+        self.b = self._get_coefficient("b")
+        self.c = self._get_coefficient("c")
+        self._calculate_roots()
+
+    def _get_coefficient(self, name: str) -> float:
+        """
+        Prompts the user to input a valid coefficient.
+
+        Args:
+            name (str): The name of the coefficient (e.g., 'a', 'b', 'c').
+
+        Returns:
+            float: The user-provided coefficient.
+        """
+        while True:
+            try:
+                return float(input(f"Enter coefficient {name}: "))
+            except ValueError:
+                print(
+                    f"Invalid input! Please enter a valid number for coefficient {name}."
+                )
+
+    def _calculate_roots(self) -> None:
+        """
+        Calculates the roots of the quadratic equation based on the discriminant.
+        Prints the result based on whether the equation has two real roots, one double root, or no real roots.
+        """
+        discriminant = self.b ** 2 - 4 * self.a * self.c
+
+        if self.a == 0:
+            print("The value of 'a' should not be zero for a quadratic equation.")
+            return
+
+        if discriminant > 0:
+            root1 = (-self.b + math.sqrt(discriminant)) / (2 * self.a)
+            root2 = (-self.b - math.sqrt(discriminant)) / (2 * self.a)
+            print(f"The equation has two real roots: {root1} and {root2}")
+
+        elif discriminant == 0:
+            root = -self.b / (2 * self.a)
+            print(f"The equation has one double root: {root}")
+
+        else:
+            print("The equation has no real roots.")
+
+
 if __name__ == "__main__":
     try:
         # Exercise1()
         # Exercise2()
-        Exercise3()
+        # Exercise3()
+        Exercise4()
 
     except ValueError as e:
         print(f"Error: {e}")
