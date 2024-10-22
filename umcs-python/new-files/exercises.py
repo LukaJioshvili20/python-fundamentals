@@ -147,10 +147,49 @@ class Exercise2:
         print(f"The factorial of {self.target_number} is {self.result}")
 
 
+class Exercise3:
+    def __init__(self):
+        self.total_number_of_target_chars: int = 0
+        self.target_char: str = ""
+        self.target_string: str = ""
+
+        self.__ask_for_target_string()
+        self.__ask_for_target_char()
+
+        self.__find_char_in_string()
+
+    def __ask_for_target_char(self) -> None:
+        while True:
+            try:
+                user_input_char = input("Enter a letter to search: ")
+                if len(user_input_char) > 1 or len(user_input_char) == 0:
+                    print("Please enter a only single letter.")
+                else:
+                    self.target_char = user_input_char
+                    return
+            except ValueError:
+                print("Invalid input! Please enter a valid integer.")
+
+    def __ask_for_target_string(self) -> None:
+        self.target_string = input("Enter word: ")
+
+    def __find_char_in_string(
+        self,
+    ) -> None:
+        for i in range(len(self.target_string)):
+            if self.target_string[i] == self.target_char:
+                self.total_number_of_target_chars += 1
+
+        print(
+            f"Count of letter {self.target_char} in word {self.target_string} is {self.total_number_of_target_chars}"
+        )
+
+
 if __name__ == "__main__":
     try:
         # Exercise1()
-        Exercise2()
+        # Exercise2()
+        Exercise3()
 
     except ValueError as e:
         print(f"Error: {e}")
