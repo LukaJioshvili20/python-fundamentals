@@ -105,13 +105,13 @@ class Exercise2:
         """
         Initializes the class, prompts the user for a number, and calculates the factorial.
         """
-        self.target_number: int = self._ask_for_number()
+        self.target_number: int = self.__ask_for_number()
         self.result: int = 1
 
         # Trigger the calculation
-        self._calculate()
+        self.__calculate()
 
-    def _ask_for_number(self) -> int:
+    def __ask_for_number(self) -> int:
         """
         Prompts the user to input a number for the factorial calculation and validates the input.
 
@@ -134,7 +134,7 @@ class Exercise2:
             except ValueError:
                 print("Invalid input! Please enter a valid integer.")
 
-    def _calculate(self) -> None:
+    def __calculate(self) -> None:
         """
         Calculates the factorial of the `target_number` and stores the result in `self.result`.
         Handles special cases like the factorial of 0 (which is 1).
