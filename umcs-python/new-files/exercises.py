@@ -175,7 +175,7 @@ class Exercise3:
         self.target_string = input("Enter word: ")
 
     def __find_char_in_string(
-            self,
+        self,
     ) -> None:
         for i in range(len(self.target_string)):
             if self.target_string[i] == self.target_char:
@@ -229,7 +229,7 @@ class Exercise4:
         Calculates the roots of the quadratic equation based on the discriminant.
         Prints the result based on whether the equation has two real roots, one double root, or no real roots.
         """
-        discriminant = self.b ** 2 - 4 * self.a * self.c
+        discriminant = self.b**2 - 4 * self.a * self.c
 
         if self.a == 0:
             print("The value of 'a' should not be zero for a quadratic equation.")
