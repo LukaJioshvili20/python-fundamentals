@@ -7,6 +7,8 @@ def get_max_number() -> None:
     This function asks the user to input five integer numbers, then calculates
     and prints the maximum of these numbers.
     """
+
+    # I do not like "one-liners", is hard to debug in the future
     print(max(int(input("Enter a number: ")) for _ in range(5)))
 
 
