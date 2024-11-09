@@ -28,13 +28,15 @@ class ChristmasTree:
     def _generate_tree_pattern(self) -> None:
         """Generates and prints the Christmas tree pattern based on the specified height."""
 
-        for i in range(self.height):
-            print(" " * (self.height - i - 1), end="")  # Print the spaces on the left
-            print("/" * i, end="")  # Print the left slashes
-            print("|", end="")  # Print the trunk part
-            print("\\" * i)  # Print the right slashes
+        print(" " * (self.height) + "*")
 
-        print(" " * (self.height - 1) + "#")  # Print the tree base
+        for i in range(1, self.height + 1):
+            print(" " * (self.height - i), end="")
+            print("/" * i, end="")
+            print("|", end="")
+            print("\\" * i)
+
+        print(" " * (self.height) + "#")
 
     def display_tree(self) -> None:
         """Main method to generate and display the Christmas tree."""
