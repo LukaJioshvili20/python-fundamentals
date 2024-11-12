@@ -2,6 +2,9 @@ import pygame
 from pygame.sprite import Sprite
 
 
+if __name__ == "__main__":
+    
+
 class Alien(Sprite):
     # Single Alien
     def __init__(self, ai_game):
