@@ -1,4 +1,5 @@
 from typing import List, Tuple
+import time
 
 CellState = int
 Neighborhood = Tuple[CellState, CellState, CellState]
@@ -82,9 +83,13 @@ class CellularAutomaton:
         Initializes the grid with a single active cell in the center.
         """
 
-        initial_state: List[CellState] = (
-            [0] * (self.width // 2) + [1] + [0] * (self.width // 2)
-        )
+        half_width: int = self.width // 2
+
+        left_padding: List[CellState] = [0] * half_width
+        center_cell: List[CellState] = [1]
+        right_padding: List[CellState] = [0] * half_width
+
+        initial_state: List[CellState] = left_padding + center_cell + right_padding
         self.grid.append(initial_state)
 
     def _compute_next_generation(
@@ -152,8 +157,59 @@ class CellularAutomaton:
                 result += " "
         return result
 
+    def get_grid(self) -> List[List[CellState]]:
+        """
+        Returns the computed grid.
+        """
+
+        return self.grid
+
+
+class AutomatonSimulator:
+    """
+    A class to simulate the drawing of a CellularAutomaton.
+    """
+
+    def __init__(self, grid: List[List[CellState]]) -> None:
+        """
+        Initializes the simulator with the automaton's grid.
+
+        Args:
+            grid (List[List[CellState]]): The computed grid of the automaton.
+        """
+
+        self.grid = grid
+
+    def simulate(self, delay: float = 0.3) -> None:
+        """
+        Simulates the drawing of the automaton grid line by line.
+
+        Args:
+            delay (float): The time delay (in seconds) between drawing each line.
+        """
+
+        for row in self.grid:
+            print(self._convert_row_to_string(row))
+            time.sleep(delay)
+
+    def _convert_row_to_string(self, row: List[CellState]) -> str:
+        """
+        Converts a row of cells into a displayable string.
+
+        Args:
+            row (List[CellState]): A list of cell states (0 or 1).
+
+        Returns:
+            str: A string representation of the row where 1 is '|' and 0 is a space.
+        """
+
+        return "".join("|" if cell == 1 else " " for cell in row)
+
 
 if __name__ == "__main__":
     automaton = CellularAutomaton()
     automaton.generate()
-    automaton.display()
+    # automaton.display()
+
+    simulator = AutomatonSimulator(automaton.get_grid())
+    simulator.simulate(delay=0.5)
