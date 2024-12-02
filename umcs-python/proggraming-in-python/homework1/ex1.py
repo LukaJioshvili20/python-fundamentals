@@ -58,8 +58,9 @@ class NumberListSorter:
     def _sort_numbers(self) -> List[int]:
         """Sorts the collected numbers in ascending order.
 
-        Returns:
-            List[int]: The sorted list of numbers.
+        something here
+                Returns:
+                    List[int]: The sorted list of numbers.
         """
 
         self._numbers = self._quick_sort(self._numbers)
@@ -73,6 +74,6 @@ class NumberListSorter:
         print("Numbers in ascending order:", sorted_numbers)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sorter = NumberListSorter()
     sorter.display_sorted_numbers()
